@@ -1,26 +1,23 @@
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class Institute{
-    //1 замена
-    //   private static HashMap<String,String> facult_inst = new HashMap<>();
+public class Institute {
 
     private HashSet<Faculty> faculties = new HashSet<>();
-    private final String NAME;
+    private String name;
 
     public Institute(String name, HashSet<Faculty> faculties) {
         this.faculties = faculties;
-        this.NAME = name;
+        this.name = name;
     }
 
     public Institute(String name) {
-        this.NAME = name;
+        this.name = name;
     }
 
 
-
     public String getName() {
-        return NAME;
+        return name;
     }
 
 
@@ -32,21 +29,22 @@ public class Institute{
                 }
             }
             faculties.add(faculty);
-        }catch (IllegalArgumentException exc){
-            System.out.println("Помилка! "+ exc.getMessage());
+        } catch (IllegalArgumentException exc) {
+            System.out.println("Помилка! " + exc.getMessage());
         }
     }
-    // Функция которая считает сколько всего учится студентов Задание 1)
+
+    // Метод рахує загальну кілкість студентів Задание 1)
     public int countStudents() {
         int quantity = 0;
         Iterator iterator = faculties.iterator();
         while (iterator.hasNext()) {
-            quantity += ((Faculty)iterator.next()).countStudents() ;
+            quantity += ((Faculty) iterator.next()).countStudents();
         }
         return quantity;
     }
 
-    // Функция которая смотрит где больше всего студентов Задание 2)
+    // Метод шукає факультет з найбільшою кілкістю студентів Задание 2)
     public void showMostStudentsFaculty() {
         try {
             Faculty answer = null;
@@ -61,19 +59,19 @@ public class Institute{
             }
             if (answer == null)
                 throw new RuntimeException("Количество факультетов равно 0 или количество студентов на факультетах 0");
-            System.out.println(answer.getName());
-        }catch(RuntimeException exc){
-            System.out.println("Помилка! "+ exc.getMessage());
+            System.out.println("Найбільша кількість студкентів на факультеті: " + answer.getName());
+        } catch (RuntimeException exc) {
+            System.out.println("Помилка! " + exc.getMessage());
         }
     }
 
-    // Фукнция которая ищет лучших студентов Задание 3)
+    // Метод шукає кращих студентів Задание 3)
     public void showBestStudents() {
         try {
             HashSet<String> bestStudents = new HashSet<>();
             for (Faculty faculty : faculties) {
                 for (Student student : faculty.getStudents()) {
-                    if (student.getGPA() >= 95) {
+                    if (student.getGpa() >= 95) {
                         bestStudents.add(student.getName());
                     }
                 }
@@ -81,15 +79,29 @@ public class Institute{
             if (bestStudents.size() == 0)
                 throw new IllegalArgumentException("Нет студентов с высокими баллами");
             System.out.println(bestStudents);
-        }catch (IllegalArgumentException exc){
-            System.out.println("Помилка! "+ exc.getMessage());
+        } catch (IllegalArgumentException exc) {
+            System.out.println("Помилка! " + exc.getMessage());
         }
+    }
+
+    // Метод переводить студента на іншу форму навчання в інституті
+
+    public void changeFormOfEnroll(Student student, FormOfEnroll form) throws SameFormOfEnrollException {
+        try {
+            if (student.formOfEnroll == form) {
+                throw new SameFormOfEnrollException("вже навчається на даній формі навчання", student);
+            }
+            student.formOfEnroll = form;
+        } catch (SameFormOfEnrollException exc) {
+            System.out.println("Помилка! " + exc.getName() + " " + exc.getMessage());
+        }
+
     }
 
     @Override
     public String toString() {
         return "Информация о Институте:" +
-                "\nНазвание: " + NAME +
-                "\nКоличество учеников: " +countStudents();
+                "\nНазвание: " + name +
+                "\nКоличество учеников: " + countStudents();
     }
 }

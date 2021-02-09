@@ -1,36 +1,41 @@
 import java.util.Objects;
 
 public class Student {
-    private String NAME; // ім’я, прізвище
-    private String INDEX; // номер залікової книжки
-    private double GPA; //середній бал
-    private Faculty FACULTY;
 
-    public Student(String name, String markBookIndex, double GPA,Faculty faculty) {
-        this.NAME = name;
-        this.INDEX = markBookIndex;
-        this.GPA = GPA;
-        this.FACULTY = faculty;
-        FACULTY.add(this);
+    private String name; // ім’я, прізвище
+    private String index; // номер залікової книжки
+    private double gpa; //середній бал
+    private Faculty faculty; // факультет
+    public FormOfEnroll formOfEnroll; // форма навчання
+
+    public Student(String name, String markBookIndex, double gpa, Faculty faculty, FormOfEnroll formOfEnroll) {
+        this.name = name;
+        this.index = markBookIndex;
+        this.gpa = gpa;
+        this.faculty = faculty;
+        this.formOfEnroll = formOfEnroll;
+        this.faculty.add(this);
     }
 
 
-    public String getName() { return NAME; }
+    public String getName() {
+        return name;
+    }
 
-    public double getGPA() {
-        return GPA;
+    public double getGpa() {
+        return gpa;
     }
 
     public String getIndex() {
-        return INDEX;
+        return index;
     }
 
-    public void setGPA(double GPA) {
-        this.GPA = GPA;
+    public void setGpa(double gpa) {
+        this.gpa = gpa;
     }
 
     public Faculty getFaculty() {
-        return FACULTY;
+        return faculty;
     }
 
     @Override
@@ -38,21 +43,22 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return NAME.equalsIgnoreCase(student.NAME);
+        return name.equalsIgnoreCase(student.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(NAME);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
         return "Вся информация о студенте:" +
-                "\nФИО: " +this.NAME +
-                "\nИнститут: " + FACULTY.getInstitute().getName() +
-                "\nФакультет: " + FACULTY.getName() +
-                "\nНомер студенческого: " + this.INDEX +
-                "\nСредний балл: " + this.GPA;
+                "\nФИО: " + this.name +
+                "\nИнститут: " + faculty.getInstitute().getName() +
+                "\nФакультет: " + faculty.getName() +
+                "\nНомер студенческого: " + this.index +
+                "\nСредний балл: " + this.gpa +
+                "\nФорма навчання: " + this.formOfEnroll;
     }
 }

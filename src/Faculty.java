@@ -3,22 +3,22 @@ import java.util.HashSet;
 import java.util.Objects;
 
 public class Faculty {
-    private final String NAME;
-    private final Institute INSTITUTE;
+    private String name;
+    private Institute institute;
     private HashSet<Student> students = new HashSet<>();
     private HashMap<String,String> student_index = new HashMap<>();
 
     public Faculty(String name, Institute institute, HashSet<Student> students) {
-        this.NAME = name;
-        this.INSTITUTE = institute;
+        this.name = name;
+        this.institute = institute;
         this.students = students;
-        INSTITUTE.add(this);
+        this.institute.add(this);
     }
 
     public Faculty(String name, Institute institute) {
-        this.NAME = name;
-        this.INSTITUTE = institute;
-        INSTITUTE.add(this);
+        this.name = name;
+        this.institute = institute;
+        this.institute.add(this);
     }
 
     public void add(Student student) {
@@ -44,13 +44,16 @@ public class Faculty {
             System.out.println("Помилка! "+ exc.getMessage());
         }
     }
-    public Institute getInstitute() { return INSTITUTE; }
 
-    public String getName() { return NAME; }
+
+    public Institute getInstitute() { return institute; }
+
+    public String getName() { return name; }
 
     public HashSet<Student> getStudents() {
         return students;
     }
+
     public int countStudents() {
         return students.size();
     }
@@ -60,19 +63,19 @@ public class Faculty {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Faculty faculty = (Faculty) o;
-        return NAME.equalsIgnoreCase(faculty.NAME);
+        return name.equalsIgnoreCase(faculty.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(NAME);
+        return Objects.hash(name);
     }
 
 
     @Override
     public String toString() {
         return "Информация о факультете:" +
-                "\nНазвание: " + NAME +
+                "\nНазвание: " + name +
                 "\nКоличество учеников: " +countStudents();
     }
 }
