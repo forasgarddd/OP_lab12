@@ -18,10 +18,10 @@ public class Lab13 {
         Student student4 = new Student("Олексій Навальний", "000005", 99.2, ipsa, FormOfEnroll.BUDGET);
 
 
-        kpi.changeFormOfEnroll(student, FormOfEnroll.CONTRACT);
-        System.out.println(student.toString());
-        kpi.changeFormOfEnroll(student, FormOfEnroll.CONTRACT);
-        System.out.println(student.toString());
+        student.changeFormOfEnroll(FormOfEnroll.CONTRACT);
+       // System.out.println(student.toString());
+        student.changeFormOfEnroll(FormOfEnroll.BUDGET);
+        //System.out.println(student.toString());
 
     }
 }

@@ -1,6 +1,6 @@
 public enum FormOfEnroll {
     BUDGET,
-    CONTRACT
+    CONTRACT;
 }
 
 

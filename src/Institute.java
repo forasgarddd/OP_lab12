@@ -86,17 +86,7 @@ public class Institute {
 
     // Метод переводить студента на іншу форму навчання в інституті
 
-    public void changeFormOfEnroll(Student student, FormOfEnroll form) throws SameFormOfEnrollException {
-        try {
-            if (student.formOfEnroll == form) {
-                throw new SameFormOfEnrollException("вже навчається на даній формі навчання", student);
-            }
-            student.formOfEnroll = form;
-        } catch (SameFormOfEnrollException exc) {
-            System.out.println("Помилка! " + exc.getName() + " " + exc.getMessage());
-        }
 
-    }
 
     @Override
     public String toString() {
