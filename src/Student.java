@@ -39,16 +39,14 @@ public class Student {
     public FormOfEnroll getFormOfEnroll(){ return formOfEnroll;}
 
     public void changeFormOfEnroll(FormOfEnroll form) throws SameFormOfEnrollException {
-        try {
+
             if (this.formOfEnroll == form) {
                 throw new SameFormOfEnrollException("вже навчається на даній формі навчання", this);
+            } else {
+                this.formOfEnroll = form;
             }
-            this.formOfEnroll = form;
-        } catch (SameFormOfEnrollException exc) {
-            System.out.println("Помилка! " + exc.getName() + " " + exc.getMessage());
-        }finally {
-            System.out.println(this.getName() + " вчиться на формі навчання: " + form);
-        }
+
+
 
     }
 

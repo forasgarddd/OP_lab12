@@ -1,6 +1,6 @@
 public class Lab13 {
 
-    public static void main(String[] args) throws SameFormOfEnrollException {
+    public static void main(String[] args) {
 
         Institute kpi = new Institute("KPI");
         Institute sheva = new Institute("SHEVA");
@@ -17,11 +17,20 @@ public class Lab13 {
         Student student3 = new Student("Володимир Зеленський", "000004", 89.3,kubik, FormOfEnroll.CONTRACT);
         Student student4 = new Student("Олексій Навальний", "000005", 99.2, ipsa, FormOfEnroll.BUDGET);
 
-
-        student.changeFormOfEnroll(FormOfEnroll.CONTRACT);
+        changeFormOfEnrollChanger(student, FormOfEnroll.CONTRACT);
        // System.out.println(student.toString());
-        student.changeFormOfEnroll(FormOfEnroll.BUDGET);
+        changeFormOfEnrollChanger(student, FormOfEnroll.CONTRACT);
         //System.out.println(student.toString());
 
+    }
+
+    public static void changeFormOfEnrollChanger (Student student, FormOfEnroll form) {
+        try {
+            student.changeFormOfEnroll(form);
+        } catch (SameFormOfEnrollException e) {
+            System.out.println("Студент " + student.getName()+ " " + e.getMessage());
+        } finally {
+            System.out.println(student.getName() + " вчиться на формі навчання: " + student.getFormOfEnroll());
+        }
     }
 }
