@@ -6,7 +6,7 @@ public class Student {
     private String index; // номер залікової книжки
     private double gpa; //середній бал
     private Faculty faculty; // факультет
-    public FormOfEnroll formOfEnroll; // форма навчання
+    private FormOfEnroll formOfEnroll; // форма навчання
 
     public Student(String name, String markBookIndex, double gpa, Faculty faculty, FormOfEnroll formOfEnroll) {
         this.name = name;
@@ -34,8 +34,22 @@ public class Student {
         this.gpa = gpa;
     }
 
-    public Faculty getFaculty() {
-        return faculty;
+    public Faculty getFaculty() { return faculty; }
+
+    public FormOfEnroll getFormOfEnroll(){ return formOfEnroll;}
+
+    public void changeFormOfEnroll(FormOfEnroll form) throws SameFormOfEnrollException {
+        try {
+            if (this.formOfEnroll == form) {
+                throw new SameFormOfEnrollException("вже навчається на даній формі навчання", this);
+            }
+            this.formOfEnroll = form;
+        } catch (SameFormOfEnrollException exc) {
+            System.out.println("Помилка! " + exc.getName() + " " + exc.getMessage());
+        }finally {
+            System.out.println(this.getName() + " вчиться на формі навчання: " + form);
+        }
+
     }
 
     @Override
